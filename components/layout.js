@@ -8,7 +8,7 @@ export default ({ children, title = 'This is the default title' }) => (
     <Head>
       <title>{ title }</title>
       <meta charSet='utf-8' />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover" />      
+      {/* <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover" />       */}
       <link rel="stylesheet" href="https://my-web-1252762366.cos.ap-beijing.myqcloud.com/blog/editormd.min.css" />
     </Head>
     <div style={{width:"100%",height:61,backgroundColor:"rgba(255,255,255,0.9)",position:"fixed",borderBottom:"1px solid #ddd",boxShadow:"0 1px 1px rgba(0,0,0,.04)",zIndex:999}}>
