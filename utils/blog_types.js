@@ -1,4 +1,4 @@
-export default [{
+var tps = [{
 	label:"笔记",
 	value:1
 },{
@@ -8,3 +8,13 @@ export default [{
 	label:"小感想",
 	value:2
 }]
+
+export const getTpValue = (tp) => {
+	let finded = tps.find(item => {
+		return item.value == tp
+	})
+	if(finded){
+		return finded.label
+	}
+	return ""
+}

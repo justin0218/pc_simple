@@ -3,27 +3,16 @@ import Head from 'next/head'
 import Router from 'next/router'
 import {Button,Input} from 'antd'
 import Left from '../components/left'
-export default ({ children, title = 'This is the default title' }) => (
+import Nav from '../components/nav'
+export default ({ children, title = 'simple' }) => (
   <div>
     <Head>
       <title>{ title }</title>
       <meta charSet='utf-8' />
-      {/* <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover" />       */}
-      <link rel="stylesheet" href="https://my-web-1252762366.cos.ap-beijing.myqcloud.com/blog/editormd.min.css" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover" />      
+      <link rel="stylesheet" href="/static/css/editormd.min.css" />
     </Head>
-    <div style={{width:"100%",height:61,backgroundColor:"rgba(255,255,255,0.9)",position:"fixed",borderBottom:"1px solid #ddd",boxShadow:"0 1px 1px rgba(0,0,0,.04)",zIndex:999}}>
-      <div style={{width:1000,margin:"0 auto",height:"100%",lineHeight:"60px",fontSize:22}}>
-        <div style={{float:'left'}}>胡星gg</div>
-        <ul id="starlist" style={{float:"right",margin:0}}>
-          <li><a href="/" id="selected" style={{color:"#f65a8a"}}>首页</a></li>
-          <li><a href="/detail">文章</a></li> 
-          <li><a href="/photo/">相册</a></li> 
-          <li><a href="/e/tool/gbook/?bid=1">留言</a></li> 
-          <li><a href="/about/">关于</a></li> 
-        </ul>
-      </div> 
-    </div>
-    <div style={{height:75}}></div>
+    <Nav />
     <article style={{width:1000,margin:"0 auto"}}>
         <Left />
         <div className="right_box">

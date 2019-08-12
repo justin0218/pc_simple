@@ -27,7 +27,9 @@ export default class extends React.Component {
       <Layout>
         {
           blogList.map((item,k)=>(
-            <div className="right_item" key={k}>
+            <div className="right_item" key={k} onClick={()=>{
+               location.href = `/detail?id=${item.id}`
+            }}>
               {item.cover && <i><img src={item.cover} /></i>}
               <h3>[ 顶 ] <span style={{color:"#222"}}>{item.name}</span></h3>
               <p>{item.preface}</p>
@@ -65,6 +67,7 @@ export default class extends React.Component {
             overflow: hidden;
             color: #797b7c;
             margin-bottom: 20px;
+            cursor: pointer;
           }
         `}</style>
       </Layout>    
