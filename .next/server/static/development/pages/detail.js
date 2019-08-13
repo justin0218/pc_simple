@@ -3676,8 +3676,8 @@ var getTpValue = function getTpValue(tp) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "apiHost", function() { return apiHost; });
-var apiHost = "//momoman.cn"; // let apiHost = "http://127.0.0.1:9000"
-// if(location.domain == "www.momoman.cn"){
+//let apiHost = "//momoman.cn"
+var apiHost = "//127.0.0.1:9000"; // if(location.domain == "www.momoman.cn"){
 //     apiHost = "http://127.0.0.1:9000"
 // }
 
