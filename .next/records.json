@@ -11,11 +11,11 @@
     "byName": {
       "commons": 0,
       "static/runtime/webpack.js": 1,
-      "static/7wUCsJiEF1uoMQjCaFixM/pages/_app.js": 2,
-      "static/7wUCsJiEF1uoMQjCaFixM/pages/_error.js": 3,
-      "static/7wUCsJiEF1uoMQjCaFixM/pages/article.js": 4,
-      "static/7wUCsJiEF1uoMQjCaFixM/pages/detail.js": 5,
-      "static/7wUCsJiEF1uoMQjCaFixM/pages/index.js": 6,
+      "static/Q5FPtxifXVedDt27u0BHD/pages/_app.js": 2,
+      "static/Q5FPtxifXVedDt27u0BHD/pages/_error.js": 3,
+      "static/Q5FPtxifXVedDt27u0BHD/pages/article.js": 4,
+      "static/Q5FPtxifXVedDt27u0BHD/pages/detail.js": 5,
+      "static/Q5FPtxifXVedDt27u0BHD/pages/index.js": 6,
       "static/runtime/main.js": 7
     },
     "bySource": {},

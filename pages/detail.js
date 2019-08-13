@@ -1,7 +1,7 @@
 import Layout from '../components/layout'
 import {getTpValue} from '../utils/blog_types'
 import moment from 'moment'
-import Item from 'antd/lib/list/Item';
+import {apiHost} from '../utils/config';
 // import banner from '../images/banner'
 
 export default class extends React.Component {
@@ -17,11 +17,11 @@ export default class extends React.Component {
 
   async componentDidMount(){
       const {id} = this.props.query
-      let res = await fetch(`//momoman.cn/v1/blog/detail?id=${id}`)
+      let res = await fetch(`${apiHost}/v1/blog/detail?id=${id}`)
       res = await res.json()
       console.log(res);
-      let key = res.data.html_txt_url.replace("http://momoman.cn/redources/","")
-      let detailHtml = await fetch(`http://momoman.cn/tool/file/read?key=${key}`);
+      let key = res.data.html_txt_url.replace("http:"+apiHost + "/redources/","")
+      let detailHtml = await fetch(`${apiHost}/tool/file/read?key=${key}`);
       detailHtml = await detailHtml.text()
       console.log(id)
       this.setState({blogDtail:detailHtml,detailData:res.data})
@@ -38,7 +38,7 @@ export default class extends React.Component {
                 <li className="author"></li>
                 <li className="lmname">{getTpValue(detailData.type)}</li>
                 <li className="timer">{moment(detailData.update_time).format("YYYY-MM-DD")}</li>
-                <li className="view"><script src="/e/public/ViewClick/?classid=3&amp;id=12&amp;addclick=1"></script>{detailData.preview} 人已阅读</li>
+                <li className="view">{detailData.preview} 人已阅读</li>
               </ul>
             </div>
             <div style={{clear:'both'}}></div>

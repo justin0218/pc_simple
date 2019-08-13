@@ -1,6 +1,6 @@
 import Layout from '../components/layout'
 import tps from '../utils/blog_types'
-// import banner from '../images/banner'
+import {apiHost} from '../utils/config'
 
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
@@ -15,7 +15,7 @@ export default class extends React.Component {
 
   async componentDidMount(){
       console.log(this.props.jsonPageRes)
-      let res = await fetch(`//momoman.cn/v1/blog/list?type=-1`)
+      let res = await fetch(`${apiHost}/v1/blog/list?type=-1`)
       res = await res.json();
       console.log(res);
       this.setState({blogList:res.data,leftHeight:document.getElementById("left_box").offsetHeight})
