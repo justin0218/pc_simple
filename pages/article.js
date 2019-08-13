@@ -1,7 +1,9 @@
 import Layout from '../components/layout'
 import tps from '../utils/blog_types'
 import {apiHost} from '../utils/config'
-
+import axios from 'axios'
+import readStream from '../utils/util'
+import protobuf from "../proto/blog_pb";
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
     const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
@@ -14,11 +16,14 @@ export default class extends React.Component {
   }
 
   async componentDidMount(){
-      console.log(this.props.jsonPageRes)
-      let res = await fetch(`${apiHost}/v1/blog/list?type=-1`)
-      res = await res.json();
-      console.log(res);
-      this.setState({blogList:res.data,leftHeight:document.getElementById("left_box").offsetHeight})
+    let res = await axios.get(`${apiHost}/v1/blog/list`,{
+      responseType: 'blob'
+    })
+    let data = await readStream(res.data);
+    let message = protobuf.blogListRes.deserializeBinary(data);
+    data = message.toObject();
+    console.log(data)
+    this.setState({blogList:data.listList})
   }
 
   render() {
@@ -31,7 +36,7 @@ export default class extends React.Component {
                location.href = `/detail?id=${item.id}`
             }}>
               {item.cover && <i><img src={item.cover} /></i>}
-              <h3><span style={{color:"#222"}}>{item.name}</span></h3>
+              <h3>{item.recommended == 1 && "[ 顶 ]"} <span style={{color:"#222"}}>{item.name}</span></h3>
               <p>{item.preface}</p>
             </div>
           ))

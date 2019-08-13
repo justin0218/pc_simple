@@ -2,7 +2,9 @@ import Layout from '../components/layout'
 import {getTpValue} from '../utils/blog_types'
 import moment from 'moment'
 import {apiHost} from '../utils/config';
-// import banner from '../images/banner'
+import protobuf from "../proto/blog_pb";
+import axios from 'axios'
+import readStream from '../utils/util'
 
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
@@ -17,14 +19,20 @@ export default class extends React.Component {
 
   async componentDidMount(){
       const {id} = this.props.query
-      let res = await fetch(`${apiHost}/v1/blog/detail?id=${id}`)
-      res = await res.json()
-      console.log(res);
-      let key = res.data.html_txt_url.replace("http:"+apiHost + "/redources/","")
-      let detailHtml = await fetch(`${apiHost}/tool/file/read?key=${key}`);
-      detailHtml = await detailHtml.text()
-      console.log(id)
-      this.setState({blogDtail:detailHtml,detailData:res.data})
+      let res = await axios.get(`${apiHost}/v1/blog/detail?id=${id}`,{
+        responseType: 'blob'
+      })
+      let data = await readStream(res.data);
+      let message = protobuf.detailRes.deserializeBinary(data);
+      data = message.toObject();
+      let key = data.htmlTxtUrl.replace("http:"+apiHost + "/redources/","");
+      let hres = await axios.get(`${apiHost}/tool/file/read?key=${key}`,{
+        responseType: 'blob'
+      })
+      let hdata = await readStream(hres.data);
+      let hmessage = protobuf.fileReadRes.deserializeBinary(hdata);
+      hdata = hmessage.toObject();
+      this.setState({blogDtail:hdata.txt,detailData:data})
   }
 
   render() {
@@ -37,8 +45,8 @@ export default class extends React.Component {
               <ul>
                 <li className="author"></li>
                 <li className="lmname">{getTpValue(detailData.type)}</li>
-                <li className="timer">{moment(detailData.update_time).format("YYYY-MM-DD")}</li>
-                <li className="view">{detailData.preview} 人已阅读</li>
+                <li className="timer">{moment(detailData.createTime).format("YYYY-MM-DD")}</li>
+                <li className="view">{detailData.view} 人已阅读</li>
               </ul>
             </div>
             <div style={{clear:'both'}}></div>

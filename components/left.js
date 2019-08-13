@@ -14,7 +14,7 @@ export default class extends React.Component {
   }
 
   async componentDidMount(){
-    if(location.pathname == "/article"){
+    if(location.pathname == "/article" || location.pathname == "/detail"){
       this.setState({orderIndex:[2,3,7,4,8,6]})
     }
     
