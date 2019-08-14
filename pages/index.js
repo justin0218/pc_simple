@@ -4,6 +4,7 @@ import {apiHost} from '../utils/config'
 import axios from 'axios'
 import readStream from '../utils/util'
 import protobuf from "../proto/blog_pb";
+import Event from '../utils/emiter';
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
     const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
@@ -15,8 +16,8 @@ export default class extends React.Component {
       leftHeight:0
   }
 
-  async componentDidMount(){
-    let res = await axios.get(`${apiHost}/v1/blog/list`,{
+  async loadList(tp){
+    let res = await axios.get(`${apiHost}/v1/blog/list?tp=${tp}`,{
       responseType: 'blob'
     })
     let data = await readStream(res.data);
@@ -24,6 +25,13 @@ export default class extends React.Component {
     data = message.toObject();
     console.log(data)
     this.setState({blogList:data.listList})
+  }
+
+  async componentDidMount(){
+    Event.on("tp",async (t)=>{
+      await this.loadList(t)
+    })
+    await this.loadList(-1)
   }
 
   render() {

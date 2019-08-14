@@ -11,12 +11,12 @@
     "byName": {
       "commons": 0,
       "static/runtime/webpack.js": 1,
-      "static/runtime/main.js": 2,
-      "static/s_2HP4BGFMfdLQStTh1li/pages/_app.js": 3,
-      "static/s_2HP4BGFMfdLQStTh1li/pages/_error.js": 4,
-      "static/s_2HP4BGFMfdLQStTh1li/pages/article.js": 5,
-      "static/s_2HP4BGFMfdLQStTh1li/pages/detail.js": 6,
-      "static/s_2HP4BGFMfdLQStTh1li/pages/index.js": 7
+      "static/hvLFdKv9ctsTj00i9Wsf9/pages/_app.js": 2,
+      "static/hvLFdKv9ctsTj00i9Wsf9/pages/_error.js": 3,
+      "static/hvLFdKv9ctsTj00i9Wsf9/pages/article.js": 4,
+      "static/hvLFdKv9ctsTj00i9Wsf9/pages/detail.js": 5,
+      "static/hvLFdKv9ctsTj00i9Wsf9/pages/index.js": 6,
+      "static/runtime/main.js": 7
     },
     "bySource": {},
     "usedIds": [

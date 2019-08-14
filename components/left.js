@@ -1,6 +1,9 @@
 import Layout from '../components/layout'
-import tps from '../utils/blog_types'
-// import banner from '../images/banner'
+import axios from 'axios'
+import readStream from '../utils/util'
+import protobuf from "../proto/blog_pb";
+import {apiHost} from '../utils/config';
+import Event from '../utils/emiter';
 
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
@@ -10,18 +13,52 @@ export default class extends React.Component {
 
   state = {
     path:"",
-    orderIndex:[0,1,2,3,4,5,6]
+    orderIndex:[],
+    tps:[],
+    rankingList:[],
+    name:"",
+    recommends:[]
+  }
+
+  registerKeyUp(){
+    document.getElementById("keyboard").onkeyup = (event) => {
+      var e = event || window.event;
+      if (e && e.keyCode == 13) { //回车键的键值为13
+        location.href = `/article?name=${this.state.name}`
+      }
+    };
   }
 
   async componentDidMount(){
+    let res = await axios.get(`${apiHost}/v1/blog/types`,{
+      responseType: 'blob'
+    })
+    let data = await readStream(res.data);
+    let message = protobuf.tps.deserializeBinary(data);
+    data = message.toObject();
+    let rankingRes = await axios.get(`${apiHost}/v1/blog/ranking?limit=5`,{
+      responseType: 'blob'
+    })
+    let rankingData = await readStream(rankingRes.data);
+    let rankingMessage = protobuf.blogListRes.deserializeBinary(rankingData);
+    rankingData = rankingMessage.toObject();
+
+    let recommendRes = await axios.get(`${apiHost}/v1/blog/recommend`,{
+      responseType: 'blob'
+    })
+    let recommendData = await readStream(recommendRes.data);
+    let recommendMessage = protobuf.blogListRes.deserializeBinary(recommendData);
+    recommendData = recommendMessage.toObject();
+    this.setState({tps:data.listList,rankingList:rankingData.listList,recommends:recommendData.listList});
     if(location.pathname == "/article" || location.pathname == "/detail"){
-      this.setState({orderIndex:[2,3,7,4,8,6]})
+      this.setState({orderIndex:[2,3,7,4,8,6]},this.registerKeyUp);
+    }else{
+      this.setState({orderIndex:[0,1,2,3,4,5,6]},this.registerKeyUp);
     }
-    
   }
 
   render() {
-    const {path,orderIndex} = this.state
+    const {path,orderIndex,tps,name,rankingList,recommends} = this.state
     return (
         <div className="left_box" id="left_box">
           {
@@ -55,30 +92,39 @@ export default class extends React.Component {
                 </div>
                 case 2:
                   return <div key={item} className="search" style={{marginBottom: 20}}>
-                    <input className="keyboard" id="keyboard" className="input_text" placeholder="请输入关键字词" style={{color: "#000"}}  type="text" />
-                    <button className="input_submit">搜索</button>
+                    <input className="keyboard" id="keyboard" onChange={(e)=>{
+                      this.setState({name:e.target.value});
+                    }} className="input_text" placeholder="请输入关键字词" style={{color: "#000"}}  type="text" />
+                    <button className="input_submit" onClick={()=>{
+                      location.href = `/article?name=${name}`
+                    }}>搜索</button>
                 </div>
                 case 3:
                   return <div key={item} className="left_item">
                     <h2>分类</h2>
                     <div style={{padding:10}}>
-                    <div className="cation_item">文章（13）</div>
-                    <div className="cation_item">相册（8）</div>
+                    {
+                      tps.map((item,k)=>(
+                        <div key={k} onClick={()=>{
+                          location.href = `/article?tp=${item.id}`
+                        }} className="cation_item">{item.lable}（{item.blogNum}）</div>
+                      ))
+                    }  
                     </div>
                   </div>
                 case 4:
                   return <div key={item} className="left_item">
                     <h2>点击排行</h2>
                     <div style={{padding:10}}>
-                    <div className="cation_item" style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
-                      <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>个人博客，我为什么要用帝国cms11111111111111111？</span>
-                    </div>
-                    <div className="cation_item" style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
-                      <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>个人博客，我为什么要用帝国cms11111111111111111？</span>
-                    </div>
-                    <div className="cation_item" style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
-                      <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>个人博客，我为什么要用帝国cms11111111111111111？</span>
-                    </div>
+                      {
+                        rankingList.map((item,k)=>(
+                          <div className="cation_item" onClick={()=>{
+                            location.href = `/detail?id=${item.id}`
+                          }} key={k} style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
+                            <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>{item.name}</span>
+                          </div>
+                        ))
+                      } 
                     </div>
                   </div>
                 case 5:
@@ -99,23 +145,23 @@ export default class extends React.Component {
                   return <div key={item} className="left_item">
                     <h2>站长推荐</h2>
                     <div style={{padding:10}}>
-                    <div className="cation_item" style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
-                      <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>个人博客，我为什么要用帝国cms11111111111111111？</span>
-                    </div>
-                    <div className="cation_item" style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
-                      <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>个人博客，我为什么要用帝国cms11111111111111111？</span>
-                    </div>
-                    <div className="cation_item" style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
-                      <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>个人博客，我为什么要用帝国cms11111111111111111？</span>
-                    </div>
+                      {
+                        recommends.map((item,k)=>(
+                          <div className="cation_item" key={k} onClick={()=>{
+                            location.href = `/detail?id=${item.id}`
+                          }} style={{backgroundImage:"url(/static/images/li.png)",backgroundRepeat: "no-repeat",backgroundPositionY: 9,textIndent: 13}}>
+                            <span style={{textOverflow: "ellipsis",whiteSpace: "nowrap",overflow: "hidden",width: 265,display: "block"}}>{item.name}</span>
+                          </div>
+                        ))
+                      }  
                     </div>
                   </div> 
                 case 8:
                   return <div key={item} className="left_item">
                     <h2>标签云</h2>
                     <div style={{padding:10}}>
-                      <a className="tag" style={{background:"#036564"}}>个人博客</a>
-                      <a className="tag" style={{background:"#3299BB"}}>旅游</a>
+                      <a href={`/article?name=golang`} className="tag" style={{background:"#036564"}}>golang</a>
+                      <a href={`/article?name=docker`} className="tag" style={{background:"#3299BB"}}>docker</a>
                       <div style={{clear:"both"}}></div>
                     </div>
                   </div>   
@@ -138,10 +184,15 @@ export default class extends React.Component {
           -o-transition: all 0.5s;
           transition: all 0.5s;
           color: #FFF;
+          text-decoration: none;
         }
         .left_item .cation_item{
           margin-bottom: 10px;
           margin-left: 10px;
+          cursor: pointer;
+        }
+        .left_item .cation_item:hover{
+          color:#222;
         }
         .search{
           border: 1px solid #000;
@@ -156,7 +207,8 @@ export default class extends React.Component {
               outline: none;
               position: absolute;
               top: 10px;
-              right: 6%;
+              right: 8%;
+              cursor: pointer;
           }
           .search input.input_text {
               border: 0;
