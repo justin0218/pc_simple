@@ -1,5 +1,5 @@
  
-let apiHost = "//momoman.cn"
+let apiHost = "//localhost:29000"
 //let apiHost = "//10.163.85.169:8888"
 
 // if(location.domain == "www.momoman.cn"){

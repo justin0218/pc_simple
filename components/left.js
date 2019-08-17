@@ -17,7 +17,8 @@ export default class extends React.Component {
     tps:[],
     rankingList:[],
     name:"",
-    recommends:[]
+    recommends:[],
+    leftStyle:{}
   }
 
   registerKeyUp(){
@@ -55,12 +56,33 @@ export default class extends React.Component {
     }else{
       this.setState({orderIndex:[0,1,2,3,4,5,6]},this.registerKeyUp);
     }
+    Event.on("left-fix",()=>{
+      let rightHeight = document.getElementsByClassName("right_box")[0].clientHeight;
+      let leftHeight = document.getElementById("left_box").clientHeight;
+      if(leftHeight < rightHeight){
+        // var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        this.setState({leftStyle:{
+          position:"fixed",
+          top:20
+        }})
+      }
+    })
+    Event.on("left-static",(h)=>{
+      let rightHeight = document.getElementsByClassName("right_box")[0].clientHeight;
+      let leftHeight = document.getElementById("left_box").clientHeight;
+      if(leftHeight < rightHeight){
+        this.setState({leftStyle:{
+          position:"static",
+          marginTop:h
+        }})
+      }
+    })
   }
 
   render() {
-    const {path,orderIndex,tps,name,rankingList,recommends} = this.state
+    const {path,orderIndex,tps,name,rankingList,recommends,leftStyle} = this.state
     return (
-        <div className="left_box" id="left_box">
+        <div className="left_box" id="left_box" style={leftStyle}>
           {
             orderIndex.map(item => {
               switch(item){

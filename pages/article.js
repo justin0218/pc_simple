@@ -23,7 +23,6 @@ export default class extends React.Component {
     let data = await readStream(res.data);
     let message = protobuf.blogListRes.deserializeBinary(data);
     data = message.toObject();
-    console.log(data)
     this.setState({blogList:data.listList})
   }
 

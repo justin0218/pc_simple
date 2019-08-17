@@ -18,6 +18,7 @@ export default ({ children, title = 'simple' }) => (
         <div className="right_box">
           { children }
         </div>
+        <div style={{clear:"both"}}></div>
     </article>
     <footer>
       <p>Make by 极简主义者</p>

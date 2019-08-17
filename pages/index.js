@@ -28,9 +28,6 @@ export default class extends React.Component {
   }
 
   async componentDidMount(){
-    Event.on("tp",async (t)=>{
-      await this.loadList(t)
-    })
     await this.loadList(-1)
   }
 
