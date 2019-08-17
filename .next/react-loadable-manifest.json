@@ -1135,7 +1135,7 @@
       "publicPath": "static/chunks/commons.a429ab50e7c8d42b0f97.js"
     }
   ],
-  "./../../../webpack/buildin/module.js": [
+  "./../webpack/buildin/module.js": [
     {
       "id": "YuTi",
       "name": "./node_modules/webpack/buildin/module.js",

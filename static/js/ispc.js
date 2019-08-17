@@ -12,8 +12,8 @@ function IsPC() {
     }
     return flag;
 }
-if(IsPC()){
+if(IsPC() && document.domain == "mobile.momoman.cn"){
     location.href = "http://www.momoman.cn";
-}else{
+}else if(!IsPC() && document.domain == "www.momoman.cn"){
     location.href = "http://mobile.momoman.cn";
 }
