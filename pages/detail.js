@@ -18,14 +18,12 @@ export default class extends React.Component {
       commentsList:[],
       commentTotal:0,
       saytext:"",
-      loadings:{
-        "comment":false
-      }
+      submitDisb:false,
+      submitTxt:"提交"
   }
 
   async getComments(){
     const {id} = this.props.query
-    this.setState({loadings:{comment:true}})
     let commentRes = await axios.get(`${apiHost}/v1/blog/messageboard/list?blog_id=${id}`,{
       responseType: 'blob'
     })
@@ -55,9 +53,9 @@ export default class extends React.Component {
   }
 
   async subMitComment(){
-    this.setState({loadings:{comment:true}})
     const {saytext} = this.state;
     const {id} = this.props.query
+    this.setState({submitDisb:true,submitTxt:"提交中"})
     let message = new protobuf.blogComment();
         message.setContent(saytext);
         message.setBlogId(id);
@@ -75,7 +73,7 @@ export default class extends React.Component {
         alert("今天您对改博客的评论已达到上限")
       }
     }
-    this.setState({loadings:{comment:false},saytext:""})
+    this.setState({submitDisb:false,submitTxt:"提交",saytext:""})
   }
 
   async makeGood(){
@@ -87,7 +85,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const {blogDtail,detailData,commentsList,loadings,saytext,commentTotal} = this.state
+    const {blogDtail,detailData,commentsList,submitDisb,submitTxt,saytext,commentTotal} = this.state
     return (
       <Layout>
           <div style={{background:"#fff",padding: "0 30px"}}>
@@ -118,7 +116,7 @@ export default class extends React.Component {
                 detailData.next ? <p>下一篇：<a href={`/detail?id=${detailData.next.id}`}>{detailData.next.name}</a></p>:<p>下一篇：<a href={`/article`}>回到列表</a></p>
               } 
             </div>
-            <div className="news_pl">
+            <div className="news_pl" id="news_pl">
                 <h2>文章评论</h2>
                 <div className="gbko">
                   {
@@ -140,7 +138,7 @@ export default class extends React.Component {
                     <textarea name="saytext" value={saytext} onChange={(e)=>{
                       this.setState({saytext:e.target.value})
                     }} rows="6" id="saytext"></textarea>
-                    <input name="imageField" type="submit" onClick={this.subMitComment.bind(this)} value="提交" style={{outline: "none",cursor: "pointer"}} />
+                    <input name="imageField" type="submit" onClick={this.subMitComment.bind(this)} disabled={submitDisb} value={submitTxt} style={{outline: "none",cursor: "pointer"}} />
                   </div>
                 </div>
             </div>

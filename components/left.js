@@ -31,6 +31,7 @@ export default class extends React.Component {
   }
 
   async componentDidMount(){
+    console.log("start")
     let res = await axios.get(`${apiHost}/v1/blog/types`,{
       responseType: 'blob'
     })
@@ -77,6 +78,13 @@ export default class extends React.Component {
         }})
       }
     })
+    console.log("end")
+    this.setState({loadings:{"me":false}})
+    setTimeout(()=>{
+      document.getElementById("t").setAttribute("class","shadownone")
+      document.getElementById("loading").style.display = "none";
+    },500)
+
   }
 
   render() {
@@ -88,18 +96,18 @@ export default class extends React.Component {
               switch(item){
                 case 0:
                   // 关于
-                  return <div key={item} className="left_item">
-                  <h2>关于</h2>
-                  <div style={{padding: 12}}>
-                    <i className="about_me_i">
-                      <img src="/static/images/me.jpeg" style={{width:120,height:120}} />
-                    </i>
-                    <p style={{lineHeight: "22px","fontSize": 14,marginTop: -6}}>
-                      <b>胡星</b>，93年出生，web前端工程师 && 服务端工程师，没什么特殊爱好，放假也是宅在家里，无聊的时候写写代码，研究研究技术方面的东西，对这种东西算一种热爱吧，但是我认为对于我来说，
-                                只是选择了这一条路，选择了就要热爱，干上一行就得爱上一行，如果当初的选择不是互联网，我也会很热爱。
-                    </p>
-                  </div>
-                </div>
+                  return  <div key={item} className="left_item">
+                    <h2>关于</h2>
+                    <div style={{padding: 12}}>
+                      <i className="about_me_i">
+                        <img src="/static/images/me.jpeg" style={{width:120,height:120}} />
+                      </i>
+                      <p style={{lineHeight: "22px","fontSize": 14,marginTop: -6}}>
+                        <b>胡星</b>，93年出生，web前端工程师 && 服务端工程师，没什么特殊爱好，放假也是宅在家里，无聊的时候写写代码，研究研究技术方面的东西，对这种东西算一种热爱吧，但是我认为对于我来说，
+                                  只是选择了这一条路，选择了就要热爱，干上一行就得爱上一行，如果当初的选择不是互联网，我也会很热爱。
+                      </p>
+                    </div>
+                  </div> 
                 case 1:
                   return <div key={item} className="left_item">
                   <h2>相册</h2>

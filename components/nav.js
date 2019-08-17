@@ -43,7 +43,7 @@ export default class extends React.Component {
           
         }
       }
-
+      //document.getElementById("t").setAttribute("class","shadownone")
       //}, 1000);
 
       
