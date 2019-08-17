@@ -3,42 +3,42 @@
   "pages": {
     "/article": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ],
     "/detail": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ],
     "/index": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ],
     "/me": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ],
     "/message": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ],
     "/_app": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ],
     "/_error": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ],
     "/": [
       "static/runtime/webpack-838b392324e3598684b5.js",
-      "static/chunks/commons.865d6677260539cd4bc2.js",
+      "static/chunks/commons.3050688f2cc90f52e263.js",
       "static/runtime/main-f1c664e4042a08874a14.js"
     ]
   }
