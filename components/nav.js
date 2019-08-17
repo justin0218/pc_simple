@@ -64,9 +64,8 @@ export default class extends React.Component {
             <ul id="starlist" style={{float:"right",margin:0}}>
               <li><a href="/" style={path == "/" ? {color:"#f65a8a"}:{}}>首页</a></li>
               <li><a href="/article" style={path == "/article" || path == "/detail" ? {color:"#f65a8a"}:{}}>文章</a></li> 
-              <li><a href="/article" style={path == "/1" ? {color:"#f65a8a"}:{}}>相册</a></li> 
-              <li><a href="/article" style={path == "/2" ? {color:"#f65a8a"}:{}}>留言</a></li> 
-              <li><a href="/article" style={path == "/3" ? {color:"#f65a8a"}:{}}>关于</a></li> 
+              <li><a href="/message" style={path == "/message" ? {color:"#f65a8a"}:{}}>留言</a></li> 
+              <li><a href="/me" style={path == "/me" ? {color:"#f65a8a"}:{}}>关于</a></li> 
             </ul>
           </div> 
         </div>

@@ -1,7 +1,7 @@
 import Layout from '../components/layout'
 import {getTpValue} from '../utils/blog_types'
 import moment from 'moment'
-import {apiHost} from '../utils/config';
+import {apiHost,avatars} from '../utils/config';
 import protobuf from "../proto/blog_pb";
 import axios from 'axios'
 import readStream from '../utils/util'
@@ -78,6 +78,14 @@ export default class extends React.Component {
     this.setState({loadings:{comment:false},saytext:""})
   }
 
+  async makeGood(){
+    let {detailData} = this.state;
+    const {id} = this.props.query
+    let res = await axios.post(`${apiHost}/v1/blog/good/make?blog_id=${id}`)
+    detailData.goodNum++
+    this.setState({detailData})
+  }
+
   render() {
     const {blogDtail,detailData,commentsList,loadings,saytext,commentTotal} = this.state
     return (
@@ -98,9 +106,9 @@ export default class extends React.Component {
             </div>
             <div dangerouslySetInnerHTML={{__html: blogDtail}} className="markdown-body editormd-preview-container" previewcontainer="true" style={{width:"auto"}}></div>
             <div className="share" style={{padding: "20px"}}>
-             <p className="diggit">
+             <button className="diggit" onClick={this.makeGood.bind(this)}>
                <a>很赞哦！</a>(<b>{detailData.goodNum}</b>)
-             </p>
+             </button>
             </div>
             <div className="nextinfo">
               {
@@ -116,7 +124,7 @@ export default class extends React.Component {
                   {
                     commentsList.map((item,k)=>(
                       <div key={k} className="fb">
-                        <ul>
+                        <ul style={{background: `url(${avatars[item.id%avatars.length]}) no-repeat top 14px left 10px`}}>
                           <span style={{color:"#000"}}>{item.name}</span>
                           <p className="fbtime"><span>{moment(item.createTime).format("YYYY-MM-DD")}</span></p>
                           <p className="fbinfo">{item.content}</p>
@@ -210,7 +218,6 @@ export default class extends React.Component {
             margin: 10px 10px;
             padding: 10px 10px 10px 70px;
             border-bottom: #ececec 1px solid;
-            background: url(/static/images/erweima.jpg) no-repeat top 14px left 10px;
             background-size: 47px 47px;
            }  
            .news_pl{
@@ -238,6 +245,8 @@ export default class extends React.Component {
             line-height: 40px;
             text-align: center;
             cursor: pointer;
+            outline: none;
+            display: block;
            }
            .news_about {
                 color: #888888;

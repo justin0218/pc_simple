@@ -7,4 +7,16 @@ let apiHost = "//momoman.cn"
 //     apiHost = "http://127.0.0.1:9000"
 // }
 
-export {apiHost}
+let avatars = [
+    '/static/images/avatars/tx2.jpg',
+    '/static/images/avatars/tx3.jpg',
+    '/static/images/avatars/tx4.jpg',
+    '/static/images/avatars/tx5.jpg',
+    '/static/images/avatars/tx6.jpg',
+    '/static/images/avatars/tx7.jpg',
+    '/static/images/avatars/tx8.jpg',
+    '/static/images/avatars/tx9.jpg',
+    '/static/images/avatars/tx10.jpg'
+];
+
+export {apiHost,avatars}

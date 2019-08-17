@@ -54,7 +54,7 @@ export default class extends React.Component {
     if(location.pathname == "/article" || location.pathname == "/detail"){
       this.setState({orderIndex:[2,3,7,4,8,6]},this.registerKeyUp);
     }else{
-      this.setState({orderIndex:[0,1,2,3,4,5,6]},this.registerKeyUp);
+      this.setState({orderIndex:[0,2,3,4,5,6]},this.registerKeyUp);
     }
     Event.on("left-fix",()=>{
       let rightHeight = document.getElementsByClassName("right_box")[0].clientHeight;
