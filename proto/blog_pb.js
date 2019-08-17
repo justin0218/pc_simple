@@ -76,7 +76,8 @@ proto.detailRes.toObject = function(includeInstance, msg) {
     name: jspb.Message.getFieldWithDefault(msg, 9, ""),
     goodNum: jspb.Message.getFieldWithDefault(msg, 10, 0),
     next: (f = msg.getNext()) && proto.detailRes.toObject(includeInstance, f),
-    prev: (f = msg.getPrev()) && proto.detailRes.toObject(includeInstance, f)
+    prev: (f = msg.getPrev()) && proto.detailRes.toObject(includeInstance, f),
+    cover: jspb.Message.getFieldWithDefault(msg, 13, "")
   };
 
   if (includeInstance) {
@@ -162,6 +163,10 @@ proto.detailRes.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.detailRes;
       reader.readMessage(value,proto.detailRes.deserializeBinaryFromReader);
       msg.setPrev(value);
+      break;
+    case 13:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCover(value);
       break;
     default:
       reader.skipField();
@@ -276,6 +281,13 @@ proto.detailRes.serializeBinaryToWriter = function(message, writer) {
       12,
       f,
       proto.detailRes.serializeBinaryToWriter
+    );
+  }
+  f = message.getCover();
+  if (f.length > 0) {
+    writer.writeString(
+      13,
+      f
     );
   }
 };
@@ -488,6 +500,21 @@ proto.detailRes.prototype.clearPrev = function() {
  */
 proto.detailRes.prototype.hasPrev = function() {
   return jspb.Message.getField(this, 12) != null;
+};
+
+
+/**
+ * optional string cover = 13;
+ * @return {string}
+ */
+proto.detailRes.prototype.getCover = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
+};
+
+
+/** @param {string} value */
+proto.detailRes.prototype.setCover = function(value) {
+  jspb.Message.setProto3StringField(this, 13, value);
 };
 
 

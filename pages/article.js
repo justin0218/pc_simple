@@ -37,16 +37,34 @@ export default class extends React.Component {
       <Layout>
         {
           blogList.map((item,k)=>(
-            <div className="right_item" key={k} onClick={()=>{
-               location.href = `/detail?id=${item.id}`
-            }}>
-              {item.cover && <i><img src={item.cover} /></i>}
-              <h3>{item.recommended == 1 && "[ 顶 ]"} <span style={{color:"#222"}}>{item.name}</span></h3>
+            <div className="right_item" key={k}>
+              {item.cover && <i><img className="coverimg" src={item.cover} /></i>}
+              <h3>{item.recommended == 1 && "[ 顶 ]"} <span style={{color:"#222"}} onClick={()=>{
+                location.href = `/detail?id=${item.id}`
+              }} className="blogname">{item.name}</span></h3>
               <p>{item.preface}</p>
             </div>
           ))
         }
         <style jsx>{`
+          .blogname:hover{
+            text-decoration: underline;
+            cursor: pointer;
+            color: #555;
+          }
+          .coverimg{
+            float: right;
+            clear: right;
+            width: 100%;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            transition: all 0.5s;
+            cursor: pointer;
+          }
+          .coverimg:hover{
+            transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+          }
           .right_item p {
             margin: 20px 0 0 0;
             line-height: 22px;
@@ -77,7 +95,6 @@ export default class extends React.Component {
             overflow: hidden;
             color: #797b7c;
             margin-bottom: 20px;
-            cursor: pointer;
           }
         `}</style>
       </Layout>    
