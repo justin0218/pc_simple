@@ -18,19 +18,26 @@
       "static/_uMqjeqk4069s59rEeCbL/pages/index.js": 6,
       "static/_uMqjeqk4069s59rEeCbL/pages/me.js": 7,
       "static/_uMqjeqk4069s59rEeCbL/pages/message.js": 8,
-      "static/runtime/main.js": 9
+      "static/runtime/main.js": 9,
+      "static/k1XMufA7AZLgKuAThAgl9/pages/_app.js": 10,
+      "static/k1XMufA7AZLgKuAThAgl9/pages/_error.js": 11,
+      "static/k1XMufA7AZLgKuAThAgl9/pages/article.js": 12,
+      "static/k1XMufA7AZLgKuAThAgl9/pages/detail.js": 13,
+      "static/k1XMufA7AZLgKuAThAgl9/pages/index.js": 14,
+      "static/k1XMufA7AZLgKuAThAgl9/pages/me.js": 15,
+      "static/k1XMufA7AZLgKuAThAgl9/pages/message.js": 16
     },
     "bySource": {},
     "usedIds": [
       0,
       1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
       9
     ]
   }

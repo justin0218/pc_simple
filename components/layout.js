@@ -24,7 +24,7 @@ export default ({ children, title = 'simple' }) => (
           <div style={{clear:"both"}}></div>
       </article>
       <footer>
-        <p>Make by 极简主义者</p>
+        <p>备案号：京ICP备16020525号</p>
       </footer>
       <a href="#" className="cd-top cd-is-visible cd-fade-out">Top</a>
     </div>
