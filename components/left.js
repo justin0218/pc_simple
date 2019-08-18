@@ -18,7 +18,8 @@ export default class extends React.Component {
     rankingList:[],
     name:"",
     recommends:[],
-    leftStyle:{}
+    leftStyle:{},
+    medata:{}
   }
 
   registerKeyUp(){
@@ -32,6 +33,15 @@ export default class extends React.Component {
 
   async componentDidMount(){
     console.log("start")
+
+    let meDetail = await axios.get(`${apiHost}/v1/blog/detail?id=35`,{
+      responseType: 'blob'
+    })
+    let medata = await readStream(meDetail.data);
+    let meMessage = protobuf.detailRes.deserializeBinary(medata);
+    medata = meMessage.toObject();
+    console.log(medata)
+
     let res = await axios.get(`${apiHost}/v1/blog/types`,{
       responseType: 'blob'
     })
@@ -53,9 +63,9 @@ export default class extends React.Component {
     recommendData = recommendMessage.toObject();
     this.setState({tps:data.listList,rankingList:rankingData.listList,recommends:recommendData.listList});
     if(location.pathname == "/article" || location.pathname == "/detail"){
-      this.setState({orderIndex:[2,3,7,4,8,6]},this.registerKeyUp);
+      this.setState({orderIndex:[2,3,7,4,8,6],medata},this.registerKeyUp);
     }else{
-      this.setState({orderIndex:[0,2,3,4,5,6]},this.registerKeyUp);
+      this.setState({orderIndex:[0,2,3,4,5,6],medata},this.registerKeyUp);
     }
     Event.on("left-fix",()=>{
       let rightHeight = document.getElementsByClassName("right_box")[0].clientHeight;
@@ -88,7 +98,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const {path,orderIndex,tps,name,rankingList,recommends,leftStyle} = this.state
+    const {path,orderIndex,tps,name,rankingList,recommends,leftStyle,medata} = this.state
     return (
         <div className="left_box" id="left_box" style={leftStyle}>
           {
@@ -103,8 +113,7 @@ export default class extends React.Component {
                         <img src="/static/images/me.jpeg" style={{width:120,height:120}} />
                       </i>
                       <p style={{lineHeight: "22px","fontSize": 14,marginTop: -6}}>
-                        <b>胡星</b>，93年出生，web前端工程师 && 服务端工程师，没什么特殊爱好，放假也是宅在家里，无聊的时候写写代码，研究研究技术方面的东西，对这种东西算一种热爱吧，但是我认为对于我来说，
-                                  只是选择了这一条路，选择了就要热爱，干上一行就得爱上一行，如果当初的选择不是互联网，我也会很热爱。
+                        <b>胡星</b>，{medata.preface}
                       </p>
                     </div>
                   </div> 

@@ -14,7 +14,6 @@ export default class extends React.Component {
 
   state = {
       blogDtail:"",
-      detailData:{},
       commentsList:[],
       commentTotal:0,
       saytext:"",
@@ -23,62 +22,25 @@ export default class extends React.Component {
       }
   }
 
-  async getComments(){
-    const {id} = this.props.query
-    this.setState({loadings:{comment:true}})
-    let commentRes = await axios.get(`${apiHost}/v1/blog/messageboard/list?blog_id=${id}`,{
+  async componentDidMount(){
+    let res = await axios.get(`${apiHost}/v1/blog/detail?id=35`,{
       responseType: 'blob'
     })
-    let commentData = await readStream(commentRes.data);
-    let commentMessage = protobuf.blogComments.deserializeBinary(commentData);
-    commentMessage = commentMessage.toObject();
-    this.setState({commentsList:commentMessage.listList,commentTotal:commentMessage.total})
-  }
-
-  async componentDidMount(){
-      let hres = await axios.get(`${apiHost}/tool/file/read?key=http://momoman.cn/redources/htxt/19b0fe8c-698c-4538-9df0-e0c45e87c930.shtml`,{
-        responseType: 'blob'
-      })
-      let hdata = await readStream(hres.data);
-      let hmessage = protobuf.fileReadRes.deserializeBinary(hdata);
-      hdata = hmessage.toObject();
-      this.setState({blogDtail:hdata.txt})
-  }
-
-  async subMitComment(){
-    this.setState({loadings:{comment:true}})
-    const {saytext} = this.state;
-    const {id} = this.props.query
-    let message = new protobuf.blogComment();
-        message.setContent(saytext);
-        message.setBlogId(id);
-    let bytes = message.serializeBinary();
-    try {
-      let res = await axios.post(`${apiHost}/v1/blog/messageboard/submit`,bytes,{headers: {'Content-Type':'application/octet-stream'}})
-      await this.getComments();
-    } catch (error) {
-      console.log(error)
-      if(error == "Error: Request failed with status code 400"){
-        alert("评论内容不能为空")
-      }else if(error == "Error: Request failed with status code 500"){
-        alert("内部出现错误")
-      }else if(error == "Error: Request failed with status code 403"){
-        alert("今天您对改博客的评论已达到上限")
-      }
-    }
-    this.setState({loadings:{comment:false},saytext:""})
-  }
-
-  async makeGood(){
-    let {detailData} = this.state;
-    const {id} = this.props.query
-    let res = await axios.post(`${apiHost}/v1/blog/good/make?blog_id=${id}`)
-    detailData.goodNum++
-    this.setState({detailData})
+    let data = await readStream(res.data);
+    let message = protobuf.detailRes.deserializeBinary(data);
+    data = message.toObject();
+    // console.log(data)
+    let hres = await axios.get(`${apiHost}/tool/file/read?key=${data.htmlTxtUrl}`,{
+      responseType: 'blob'
+    })
+    let hdata = await readStream(hres.data);
+    let hmessage = protobuf.fileReadRes.deserializeBinary(hdata);
+    hdata = hmessage.toObject();
+    this.setState({blogDtail:hdata.txt})
   }
 
   render() {
-    const {blogDtail,detailData,commentsList,loadings,saytext,commentTotal} = this.state
+    const {blogDtail} = this.state
     return (
       <Layout>
           <div style={{background:"#fff",padding: "0 15px",marginBottom: 20}}>
