@@ -1,9 +1,5 @@
-import Layout from '../components/layout'
-import axios from 'axios'
-import readStream from '../utils/util'
-import protobuf from "../proto/blog_pb";
-import {apiHost} from '../utils/config';
 import Event from '../utils/emiter';
+import * as api from '../apis/blog';
 
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
@@ -33,35 +29,16 @@ export default class extends React.Component {
 
   async componentDidMount(){
     console.log("start")
-
-    let meDetail = await axios.get(`${apiHost}/v1/blog/detail?id=35`,{
-      responseType: 'blob'
-    })
-    let medata = await readStream(meDetail.data);
-    let meMessage = protobuf.detailRes.deserializeBinary(medata);
-    medata = meMessage.toObject();
-    console.log(medata)
-
-    let res = await axios.get(`${apiHost}/v1/blog/types`,{
-      responseType: 'blob'
-    })
-    let data = await readStream(res.data);
-    let message = protobuf.tps.deserializeBinary(data);
-    data = message.toObject();
-    let rankingRes = await axios.get(`${apiHost}/v1/blog/ranking?limit=5`,{
-      responseType: 'blob'
-    })
-    let rankingData = await readStream(rankingRes.data);
-    let rankingMessage = protobuf.blogListRes.deserializeBinary(rankingData);
-    rankingData = rankingMessage.toObject();
-
-    let recommendRes = await axios.get(`${apiHost}/v1/blog/recommend`,{
-      responseType: 'blob'
-    })
-    let recommendData = await readStream(recommendRes.data);
-    let recommendMessage = protobuf.blogListRes.deserializeBinary(recommendData);
-    recommendData = recommendMessage.toObject();
-    this.setState({tps:data.listList,rankingList:rankingData.listList,recommends:recommendData.listList});
+    //关于我的信息
+    let medata = await api.GetBlogDetail(35);
+    medata = medata.currentArticle;
+    //所有类型的博客数
+    let data = await api.GetBlogTypes();
+    //排行榜数据  
+    let rankingData = await api.GetBlogRanking(5);
+    //获取推荐数据
+    let recommendData = await api.GetBlogRecommend()
+    this.setState({tps:data.blogTypeListList,rankingList:rankingData.blogArticleListList,recommends:recommendData.blogArticleListList});
     if(location.pathname == "/article" || location.pathname == "/detail"){
       this.setState({orderIndex:[2,3,7,4,8,6],medata},this.registerKeyUp);
     }else{
@@ -88,13 +65,11 @@ export default class extends React.Component {
         }})
       }
     })
-    console.log("end")
     this.setState({loadings:{"me":false}})
     setTimeout(()=>{
       document.getElementById("t").setAttribute("class","shadownone")
       document.getElementById("loading").style.display = "none";
     },500)
-
   }
 
   render() {
@@ -110,7 +85,7 @@ export default class extends React.Component {
                     <h2>关于</h2>
                     <div style={{padding: 12}}>
                       <i className="about_me_i">
-                        <img src="/static/images/me.jpeg" style={{width:120,height:120}} />
+                        <img src="http://momoman.cn/redources/images/c4dd4d91-8702-4470-9b4b-96368140239c.jpeg" style={{width:120}} />
                       </i>
                       <p style={{lineHeight: "22px","fontSize": 14,marginTop: -6}}>
                         <b>胡星</b>，{medata.preface}

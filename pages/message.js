@@ -1,10 +1,8 @@
-import Layout from '../components/layout'
-import {getTpValue} from '../utils/blog_types'
-import moment from 'moment'
+import Layout from '../components/layout';
+import moment from 'moment';
 import {apiHost,avatars} from '../utils/config';
-import protobuf from "../proto/blog_pb";
 import axios from 'axios'
-import readStream from '../utils/util'
+import * as api from '../apis/blog';
 
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
@@ -23,14 +21,8 @@ export default class extends React.Component {
   }
 
   async getComments(){
-    let commentRes = await axios.get(`${apiHost}/v1/blog/messageboard/list`,{
-      responseType: 'blob'
-    })
-    let commentData = await readStream(commentRes.data);
-    let commentMessage = protobuf.blogComments.deserializeBinary(commentData);
-    commentMessage = commentMessage.toObject();
-    console.log(commentMessage)
-    this.setState({commentsList:commentMessage.listList,commentTotal:commentMessage.total})
+    let commentMessage = await api.GetBlogComments(0);
+    this.setState({commentsList:commentMessage.blogCommentListList,commentTotal:commentMessage.total})
   }
 
   async componentDidMount(){
@@ -38,23 +30,13 @@ export default class extends React.Component {
   }
 
   async subMitComment(){
-    const {saytext,submitDisb,submitTxt} = this.state;
-    this.setState({submitDisb:true,submitTxt:"提交中"})
-    let message = new protobuf.blogComment();
-        message.setContent(saytext);
-        message.setBlogId(0);
-    let bytes = message.serializeBinary();
-    try {
-      let res = await axios.post(`${apiHost}/v1/blog/messageboard/submit`,bytes,{headers: {'Content-Type':'application/octet-stream'}})
+    const {saytext} = this.state;
+    this.setState({submitDisb:true,submitTxt:"提交中"});
+    let res = await api.SubMitComment(saytext,0);
+    if (res.code != 0){
+      alert(res.msg);
+    }else{
       await this.getComments();
-    } catch (error) {
-      if(error == "Error: Request failed with status code 400"){
-        alert("评论内容不能为空")
-      }else if(error == "Error: Request failed with status code 500"){
-        alert("内部出现错误")
-      }else if(error == "Error: Request failed with status code 403"){
-        alert("今天您对改博客的评论已达到上限")
-      }
     }
     this.setState({submitDisb:false,submitTxt:"提交",saytext:""})
   }

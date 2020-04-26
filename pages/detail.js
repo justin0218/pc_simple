@@ -5,6 +5,7 @@ import {apiHost,avatars} from '../utils/config';
 import protobuf from "../proto/blog_pb";
 import axios from 'axios'
 import readStream from '../utils/util'
+import * as api from '../apis/blog';
 
 export default class extends React.Component {
   static async getInitialProps({ req,query,jsonPageRes }) {
@@ -24,62 +25,36 @@ export default class extends React.Component {
 
   async getComments(){
     const {id} = this.props.query
-    let commentRes = await axios.get(`${apiHost}/v1/blog/messageboard/list?blog_id=${id}`,{
-      responseType: 'blob'
-    })
-    let commentData = await readStream(commentRes.data);
-    let commentMessage = protobuf.blogComments.deserializeBinary(commentData);
-    commentMessage = commentMessage.toObject();
-    this.setState({commentsList:commentMessage.listList,commentTotal:commentMessage.total})
+    let commentMessage = await api.GetBlogComments(id);
+    this.setState({commentsList:commentMessage.blogCommentListList,commentTotal:commentMessage.total})
   }
 
   async componentDidMount(){
       const {id} = this.props.query
-      let res = await axios.get(`${apiHost}/v1/blog/detail?id=${id}`,{
-        responseType: 'blob'
-      })
-      let data = await readStream(res.data);
-      let message = protobuf.detailRes.deserializeBinary(data);
-      data = message.toObject();
-      // console.log(data)
-      let hres = await axios.get(`${apiHost}/tool/file/read?key=${data.htmlTxtUrl}`,{
-        responseType: 'blob'
-      })
-      let hdata = await readStream(hres.data);
-      let hmessage = protobuf.fileReadRes.deserializeBinary(hdata);
-      hdata = hmessage.toObject();
+      let res = await api.GetBlogDetail(id);
+      let data = res.currentArticle;
+      let fileContent = await api.ReadNetFile(data.htmlTxtUrl)
       await this.getComments();
-      this.setState({blogDtail:hdata.txt,detailData:data})
+      this.setState({blogDtail:fileContent.txt,detailData:data})
   }
 
   async subMitComment(){
     const {saytext} = this.state;
     const {id} = this.props.query
     this.setState({submitDisb:true,submitTxt:"提交中"})
-    let message = new protobuf.blogComment();
-        message.setContent(saytext);
-        message.setBlogId(id);
-    let bytes = message.serializeBinary();
-    try {
-      let res = await axios.post(`${apiHost}/v1/blog/messageboard/submit`,bytes,{headers: {'Content-Type':'application/octet-stream'}})
+    let res = await api.SubMitComment(saytext,id);
+    if (res.code != 0){
+      alert(res.msg);
+    }else{
       await this.getComments();
-    } catch (error) {
-      console.log(error)
-      if(error == "Error: Request failed with status code 400"){
-        alert("评论内容不能为空")
-      }else if(error == "Error: Request failed with status code 500"){
-        alert("内部出现错误")
-      }else if(error == "Error: Request failed with status code 403"){
-        alert("今天您对改博客的评论已达到上限")
-      }
     }
     this.setState({submitDisb:false,submitTxt:"提交",saytext:""})
   }
 
   async makeGood(){
     let {detailData} = this.state;
-    const {id} = this.props.query
-    let res = await axios.post(`${apiHost}/v1/blog/good/make?blog_id=${id}`)
+    const {id} = this.props.query;
+    api.MakeGood(id)
     detailData.goodNum++
     this.setState({detailData})
   }

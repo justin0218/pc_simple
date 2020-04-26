@@ -12,6 +12,7 @@ export default ({ children, title = 'simple' }) => (
       <meta charSet='utf-8' />
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover" />      
       <link rel="stylesheet" href="/static/css/editormd.min.css" />
+      <link rel="manifest" href="/static/manifest.json"></link>
       <script src="/static/js/ispc.js"></script>
     </Head>
     <Nav />

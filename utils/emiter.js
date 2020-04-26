@@ -2,7 +2,6 @@ const Event = {
     // 通过on接口监听事件eventName
     // 如果事件eventName被触发，则执行callback回调函数
     on: function (eventName, callback) {
-        console.log("onnnn")
     　　if (!this.handles) {
     　　　　this.handles = {};
     　　　　Object.defineProperty(this, "handles", { //限制下方Object.assign浅拷贝枚举对象
