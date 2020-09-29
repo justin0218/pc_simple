@@ -1,3 +1,3 @@
-npm install --save next react react-dom
 npm install
+npm install --save next react react-dom
 npm run build
