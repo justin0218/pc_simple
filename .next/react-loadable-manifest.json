@@ -871,7 +871,7 @@
       "publicPath": "static/chunks/commons.eb8c160a35a7a96d337a.js"
     }
   ],
-  "../modules/_core": [
+  "../../modules/_core": [
     {
       "id": "WEpk",
       "name": "./node_modules/core-js/library/modules/_core.js",
@@ -1175,7 +1175,7 @@
       "publicPath": "static/chunks/commons.eb8c160a35a7a96d337a.js"
     }
   ],
-  "../proto/errors_pb": [
+  "./errors_pb.js": [
     {
       "id": "i9rC",
       "name": "./proto/errors_pb.js",
@@ -1383,7 +1383,7 @@
       "publicPath": "static/chunks/commons.eb8c160a35a7a96d337a.js"
     }
   ],
-  "../proto/blogComment_pb": [
+  "./blogComment_pb.js": [
     {
       "id": "taTz",
       "name": "./proto/blogComment_pb.js",
