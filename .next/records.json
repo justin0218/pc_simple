@@ -31,23 +31,33 @@
       "static/MPPpVhjvDAj9~h3zaQ~gg/pages/index.js": 19,
       "static/MPPpVhjvDAj9~h3zaQ~gg/pages/me.js": 20,
       "static/MPPpVhjvDAj9~h3zaQ~gg/pages/message.js": 21,
-      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/message_copy.js": 22
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/message_copy.js": 22,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/_app.js": 2,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/_error.js": 3,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/article.js": 4,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/chat.js": 5,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/chatroom.js": 6,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/detail.js": 7,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/index.js": 8,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/me.js": 9,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/message.js": 10,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/message_copy.js": 11
     },
     "bySource": {},
     "usedIds": [
       0,
       1,
+      10,
+      11,
       12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
     ]
   }
 }
