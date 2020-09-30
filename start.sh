@@ -1,1 +1,1 @@
-npm start
+/usr/local/bin/npm start
