@@ -1,1 +1,2 @@
-/usr/local/bin/npm start
+#!/bin/env bash -il
+npm start
