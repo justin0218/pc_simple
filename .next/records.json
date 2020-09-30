@@ -1,0 +1,63 @@
+{
+  "modules": {
+    "byIdentifier": {
+      "multi node_modules/next/dist/client/next": 0
+    },
+    "usedIds": {
+      "0": 0
+    }
+  },
+  "chunks": {
+    "byName": {
+      "commons": 0,
+      "static/runtime/webpack.js": 1,
+      "static/CkfENsk004ch6D5OtPSh3/pages/_app.js": 2,
+      "static/CkfENsk004ch6D5OtPSh3/pages/_error.js": 3,
+      "static/CkfENsk004ch6D5OtPSh3/pages/article.js": 4,
+      "static/CkfENsk004ch6D5OtPSh3/pages/chat.js": 5,
+      "static/CkfENsk004ch6D5OtPSh3/pages/chatroom.js": 6,
+      "static/CkfENsk004ch6D5OtPSh3/pages/detail.js": 7,
+      "static/CkfENsk004ch6D5OtPSh3/pages/index.js": 8,
+      "static/CkfENsk004ch6D5OtPSh3/pages/me.js": 9,
+      "static/CkfENsk004ch6D5OtPSh3/pages/message.js": 10,
+      "static/CkfENsk004ch6D5OtPSh3/pages/message_copy.js": 11,
+      "static/runtime/main.js": 12,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/_app.js": 13,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/_error.js": 14,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/article.js": 15,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/chat.js": 16,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/chatroom.js": 17,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/detail.js": 18,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/index.js": 19,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/me.js": 20,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/message.js": 21,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/message_copy.js": 22,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/_app.js": 2,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/_error.js": 3,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/article.js": 4,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/chat.js": 5,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/chatroom.js": 6,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/detail.js": 7,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/index.js": 8,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/me.js": 9,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/message.js": 10,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/message_copy.js": 11
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      10,
+      11,
+      12,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}

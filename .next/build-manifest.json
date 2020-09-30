@@ -1,0 +1,60 @@
+{
+  "devFiles": [],
+  "pages": {
+    "/article": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/chat": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/chatroom": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/detail": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/index": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/me": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/message_copy": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/message": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/_app": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/_error": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ],
+    "/": [
+      "static/runtime/webpack-838b392324e3598684b5.js",
+      "static/chunks/commons.eb8c160a35a7a96d337a.js",
+      "static/runtime/main-9037314b42360f7ce5ac.js"
+    ]
+  }
+}

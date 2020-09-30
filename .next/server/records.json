@@ -1,0 +1,81 @@
+{
+  "modules": {
+    "byIdentifier": {
+      "multi private-next-pages/article.js": 0,
+      "multi private-next-pages/chat.js": 1,
+      "multi private-next-pages/chatroom.js": 2,
+      "multi private-next-pages/detail.js": 3,
+      "multi private-next-pages/index.js": 4,
+      "multi private-next-pages/me.js": 5,
+      "multi private-next-pages/message_copy.js": 6,
+      "multi private-next-pages/message.js": 7,
+      "multi next/dist/pages/_app": 8,
+      "multi next/dist/pages/_error": 9,
+      "multi next/dist/pages/_document": 10
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10
+    }
+  },
+  "chunks": {
+    "byName": {
+      "static/CkfENsk004ch6D5OtPSh3/pages/_app.js": 0,
+      "static/CkfENsk004ch6D5OtPSh3/pages/_document.js": 1,
+      "static/CkfENsk004ch6D5OtPSh3/pages/_error.js": 2,
+      "static/CkfENsk004ch6D5OtPSh3/pages/article.js": 3,
+      "static/CkfENsk004ch6D5OtPSh3/pages/chat.js": 4,
+      "static/CkfENsk004ch6D5OtPSh3/pages/chatroom.js": 5,
+      "static/CkfENsk004ch6D5OtPSh3/pages/detail.js": 6,
+      "static/CkfENsk004ch6D5OtPSh3/pages/index.js": 7,
+      "static/CkfENsk004ch6D5OtPSh3/pages/me.js": 8,
+      "static/CkfENsk004ch6D5OtPSh3/pages/message.js": 9,
+      "static/CkfENsk004ch6D5OtPSh3/pages/message_copy.js": 10,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/_app.js": 11,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/_document.js": 12,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/_error.js": 13,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/article.js": 14,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/chat.js": 15,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/chatroom.js": 16,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/detail.js": 17,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/index.js": 18,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/me.js": 19,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/message.js": 20,
+      "static/MPPpVhjvDAj9~h3zaQ~gg/pages/message_copy.js": 21,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/_app.js": 0,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/_document.js": 1,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/_error.js": 2,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/article.js": 3,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/chat.js": 4,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/chatroom.js": 5,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/detail.js": 6,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/index.js": 7,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/me.js": 8,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/message.js": 9,
+      "static/iHCDUulgz8TfsKmHGxMNl/pages/message_copy.js": 10
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      10,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}
